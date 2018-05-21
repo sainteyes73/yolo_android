@@ -40,7 +40,8 @@ public class MainActivity extends BaseActivity
         initView();
     }
     public void setting(){
-        mDatabase= FirebaseDatabase.getInstance().getReference();
+
+        mDatabase= FirebaseDatabase.getInstance().getReference("users");
     }
     public void setnav(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity
         final TextView navUsername = (TextView)headerView.findViewById(R.id.nickname);
         final TextView navEmail= (TextView)headerView.findViewById(R.id.head_id);
         navigationView.setNavigationItemSelectedListener(this);
-        mDatabase.child("users").child(getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
@@ -135,7 +136,7 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.all_product) {
-            Intent intent = new Intent(MainActivity.this, product_list.class);
+            Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
             startActivity(intent);
         }
         /*

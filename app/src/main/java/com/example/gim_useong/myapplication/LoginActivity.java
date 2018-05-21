@@ -29,7 +29,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mPasswordField;//비밀번호변수
     private Button mSignInButton;//signin버튼
     private Button mSignUpButton;//signup 버튼
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

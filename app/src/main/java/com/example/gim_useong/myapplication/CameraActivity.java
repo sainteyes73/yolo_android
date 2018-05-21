@@ -142,7 +142,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     private void transserver(){
         Log.d("woo","2 ok");
         Future uploading = Ion.with(CameraActivity.this)
-                .load("http://192.168.42.191:8080/upload/"+getUid())
+                .load("http://172.30.1.49:8080/upload/"+getUid())
                 .setMultipartFile("image",f )
                 .asString()
                 .withResponse()
@@ -155,6 +155,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
 
                             if(jobj.getString("response")=="Saved"){
                                 //액티비티 넘길것
+                                postkey=jobj.getString("postkey");
                             }
 
                         }catch(JSONException e1){
