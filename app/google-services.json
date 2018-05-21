@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "803836306413",
+    "firebase_url": "https://refri-97254.firebaseio.com",
+    "project_id": "refri-97254",
+    "storage_bucket": "refri-97254.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803836306413:android:596bd872bd432d16",
+        "android_client_info": {
+          "package_name": "com.example.gim_useong.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803836306413-farceuvd7b134rq85apm1h11ocn757cq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gim_useong.myapplication",
+            "certificate_hash": "fd771dc26129b7e3ca402b4f0f22cb77b281092d"
+          }
+        },
+        {
+          "client_id": "803836306413-2j014d70mmq0tle9jekcpjr21v3uls5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdrq4V3MwRQyYu9wux4XzgAAmm5es6bWU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803836306413-2j014d70mmq0tle9jekcpjr21v3uls5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
