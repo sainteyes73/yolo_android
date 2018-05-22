@@ -155,7 +155,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
 
                             if(jobj.getString("response")=="Saved"){
                                 //액티비티 넘길것
-                                postkey=jobj.getString("postkey");
+                                //postkey=jobj.getString("postkey");
                             }
 
                         }catch(JSONException e1){

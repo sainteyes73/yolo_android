@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseActivity extends AppCompatActivity {
-    public String postkey;
     public ProgressDialog mProgressDialog;
 
     public void showProgressDialog(){

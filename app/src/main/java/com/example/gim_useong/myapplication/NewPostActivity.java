@@ -91,6 +91,7 @@ public class NewPostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
+                            Log.d("aaaa","good");
                             writeNewPost(userId, user.username, title, body);
                         }
 
@@ -127,11 +128,14 @@ public class NewPostActivity extends BaseActivity {
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
         Post post = new Post(userId, username, title, body);
+        //mDatabase.child("posts").setValue(post);
         Map<String, Object> postValues = post.toMap();
 
+
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/posts/" + key, postValues);
-        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("posts/" + key, postValues);
+        childUpdates.put("user-posts/" + userId + "/" + key, postValues);
+
 
         mDatabase.updateChildren(childUpdates);
     }
