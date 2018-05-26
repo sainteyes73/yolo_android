@@ -41,7 +41,6 @@
         <activity android:name=".PostDetailActivity">
 
         </activity>
-        <activity android:name=".NewPostActivity"></activity>
 
     </application>
 
