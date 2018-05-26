@@ -5,7 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,7 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.gim_useong.myapplication.models.Post;
 import com.example.gim_useong.myapplication.models.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class NewPostActivity extends BaseActivity {
@@ -28,8 +34,13 @@ public class NewPostActivity extends BaseActivity {
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
 
-    private EditText mTitleField;
-    private EditText mBodyField;
+    private ListAdapter adapter;
+    private Button add;
+    private Button remove;
+    private Button result;
+    private ListView listView;
+    private int num;
+
     private FloatingActionButton mSubmitButton;
 
     @Override
@@ -41,10 +52,25 @@ public class NewPostActivity extends BaseActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
 
-        mTitleField = findViewById(R.id.field_title);
-        mBodyField = findViewById(R.id.field_body);
-        mSubmitButton = findViewById(R.id.fab_submit_post);
+        //mTitleField = findViewById(R.id.field_title);
+        num = 0;
 
+        add =(Button)findViewById(R.id.add);
+        listView=(ListView)findViewById(R.id.post_listview);
+        mSubmitButton=findViewById(R.id.fab_submit_post);
+        adapter = new ListAdapter();
+
+        listView.setAdapter(adapter);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(NewPostActivity.this, "추가되었습니다.", Toast.LENGTH_SHORT).show();
+                adapter.addItem("");
+                adapter.notifyDataSetChanged();
+                num ++;
+            }
+        });
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,17 +78,20 @@ public class NewPostActivity extends BaseActivity {
             }
         });
     }
-
     private void submitPost() {
-        final String title = mTitleField.getText().toString();
+//        final String title = mTitleField.getText().toString();
         final String body = mBodyField.getText().toString();
+        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyy.MM.dd", Locale.KOREA );
+        Date currentTime = new Date ();
+        final String mTime = mSimpleDateFormat.format ( currentTime );
 
         // Title is required
+         /*
         if (TextUtils.isEmpty(title)) {
             mTitleField.setError(REQUIRED);
             return;
         }
-
+          */
         // Body is required
         if (TextUtils.isEmpty(body)) {
             mBodyField.setError(REQUIRED);
@@ -92,7 +121,7 @@ public class NewPostActivity extends BaseActivity {
                         } else {
                             // Write new post
                             Log.d("aaaa","good");
-                            writeNewPost(userId, user.username, title, body);
+                            writeNewPost(userId, user.username, body, mTime);
                         }
 
                         // Finish this Activity, back to the stream
@@ -123,18 +152,19 @@ public class NewPostActivity extends BaseActivity {
     }
 
     // [START write_fan_out]
-    private void writeNewPost(String userId, String username, String title, String body) {
+    private void writeNewPost(String userId, String username, String body, String time) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(userId, username, title, body);
+
+        String key = mDatabase.child("total_refri").push().getKey();
+        Post post = new Post(userId, username, body, time);
         //mDatabase.child("posts").setValue(post);
         Map<String, Object> postValues = post.toMap();
 
 
         Map<String, Object> childUpdates = new HashMap<>();
-     //   childUpdates.put("posts/" + key, postValues);
-        childUpdates.put("user-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("total_refri/" + key, postValues);
+        childUpdates.put("user_refri/" + userId + "/" + key, postValues);
 
 
         mDatabase.updateChildren(childUpdates);
